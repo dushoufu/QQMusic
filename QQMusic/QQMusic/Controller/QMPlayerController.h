@@ -1,0 +1,18 @@
+//
+//  QMPlayerController.h
+//  QQMusic
+//
+//  Created by AenyMo on 16/4/12.
+//  Copyright © 2016年 AenyMo. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface QMPlayerController : UIViewController
+
+- (void)updateInfo;
+
+/** 显示控制器的View */
+- (void)show;
+
+@end
