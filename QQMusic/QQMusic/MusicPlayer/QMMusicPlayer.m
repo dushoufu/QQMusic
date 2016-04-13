@@ -15,6 +15,12 @@ static QMMusicPlayer *instance = nil;
 
 @interface QMMusicPlayer () <AVAudioPlayerDelegate>
 
+/** 音乐列表 */
+@property (nonatomic, strong) NSArray *musics;
+
+/** 播放器 */
+@property (nonatomic, strong) AVAudioPlayer *player;
+
 /** 正在播放的索引 */
 @property (nonatomic, assign) NSInteger playingIndex;
 
@@ -67,7 +73,20 @@ static QMMusicPlayer *instance = nil;
     [self playWithIndexNumber:_playingIndex];
 }
 
+#pragma mark - 单例创建播放器
+/** 通过单例创建播放器 */
++ (instancetype)shareMusicPlayer {
+    
+    if (instance == nil) {
+        //
+        //创建播放器对象
+        instance = [[self alloc] init];
+    }
+    
+    return instance;
+}
 
+#pragma mark - 音乐播放
 /** 通过索引播放音乐 */
 - (BOOL)playWithIndexNumber:(NSInteger)IndexNumber {
     
@@ -103,8 +122,6 @@ static QMMusicPlayer *instance = nil;
     return [self.player playAtTime:time];
 }
 
-
-
 - (BOOL)pause {
     
     //如果正在播放
@@ -136,27 +153,18 @@ static QMMusicPlayer *instance = nil;
     return NO;
 }
 
+//下一曲
 - (void)nextOne {
     
     self.playingIndex++;
 }
 
+//上一曲
 - (void)preOne {
     
     self.playingIndex--;
 }
 
-/** 通过单例创建播放器 */
-+ (instancetype)shareMusicPlayer {
-    
-    if (instance == nil) {
-        //
-        //创建播放器对象
-        instance = [[self alloc] init];
-    }
-    
-    return instance;
-}
 
 #pragma mark - 重写get方法
 - (NSTimeInterval)totalTime {

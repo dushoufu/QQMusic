@@ -8,6 +8,8 @@
 
 #import "QMTopDisplayView.h"
 #import "QMPlayerController.h"
+#import "QMLyricLine.h"
+#import "QMLyricTool.h"
 
 
 @interface QMTopDisplayView ()
@@ -15,7 +17,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *singerLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *albumCover;
-
+@property (nonatomic, weak) IBOutlet QMLyricLine *lyricLine;
 
 @end
 
@@ -41,6 +43,18 @@
     _singerIcon = singerIcon;
     
     self.albumCover.image = [UIImage imageNamed:singerIcon];
+}
+
+- (void)setLyric:(NSString *)lyric {
+    
+    _lyric = lyric;
+    
+    //
+    NSString *path = [[NSBundle mainBundle] pathForResource:lyric ofType:nil];
+    
+    NSString *lrc = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
+    
+    self.lyricLine.lyricLines = [QMLyricTool lyricLinesWithLyricString:lrc];
 }
 
 #pragma mark - 动画操作
@@ -101,11 +115,6 @@
     
     //设置代理
     
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    
-    NSLog(@".....");
 }
 
 

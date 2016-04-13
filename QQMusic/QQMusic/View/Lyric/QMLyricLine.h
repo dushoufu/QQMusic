@@ -1,5 +1,5 @@
 //
-//  QMLyricView.h
+//  QMLyricLine.h
 //  QQMusic
 //
 //  Created by AenyMo on 16/4/13.
@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface QMLyricView : UILabel
+@interface QMLyricLine : UILabel
+
+@property (nonatomic, strong) NSArray *lyricLines;
+
 
 @end

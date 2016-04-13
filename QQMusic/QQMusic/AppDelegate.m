@@ -18,7 +18,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    [UINavigationBar appearance].barTintColor = [UIColor greenColor];
+    // 导航栏颜色
+    [UINavigationBar appearance].barTintColor = [UIColor colorWithRed:0 green:205 / 255.0 blue:126 / 255.0 alpha:1.0];
+    
+    //设置状态栏
+    application.statusBarHidden = NO;
+    application.statusBarStyle = UIStatusBarStyleLightContent;
     
     return YES;
 }

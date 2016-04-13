@@ -13,4 +13,9 @@
 /** 时间转字符串 */
 + (NSString *)stringByTimeInterval:(NSTimeInterval)timeInterval;
 
+/** 解析歌词 */
++ (NSArray *)lyricLinesByLyricString:(NSString *)lyricString;
+
++ (NSArray *)lyricTimesByLyricString:(NSString *)lyricString;
+
 @end

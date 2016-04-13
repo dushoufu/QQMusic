@@ -19,6 +19,9 @@
 
 @interface QMPlayerController () <QMMusicPlayerDelegate>
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *currentTime;
 @property (weak, nonatomic) IBOutlet UIImageView *sliderRight;
 @property (weak, nonatomic) IBOutlet UIImageView *sliderLeft;
@@ -194,7 +197,7 @@
     
     self.sliderLeft.width = (self.player.currentTime / self.player.totalTime) * self.sliderRight.width;
     
-    NSLog(@"......%f", self.sliderLeft.width);
+//    NSLog(@"......%f", self.sliderLeft.width);
     
     self.sliderThumb.centerX = CGRectGetMaxX(self.sliderLeft.frame);
     
@@ -262,12 +265,14 @@
     self.topView.singer = playingModel.singer;
     self.topView.singerIcon = playingModel.singerIcon;
     
+    //设置背景音乐
+    self.backgroundImage.image = [UIImage imageNamed:playingModel.singerIcon];
+    
+    //设置歌词
+    self.topView.lyric = playingModel.lrcname;
+    
 }
 
-- (UIStatusBarStyle)preferredStatusBarStyle {
-    
-    return UIStatusBarStyleLightContent;
-}
 
 - (void)dealloc {
     

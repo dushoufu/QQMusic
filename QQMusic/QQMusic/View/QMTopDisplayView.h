@@ -19,6 +19,9 @@
 /** 图片 */
 @property (nonatomic, copy) NSString *singerIcon;
 
+/** 歌词 */
+@property (nonatomic, copy) NSString *lyric;
+
 /** 开始旋转 */
 - (void)startRotation;
 

@@ -38,18 +38,11 @@ typedef enum : NSUInteger {
 @property (nonatomic, weak) id<QMMusicPlayerDelegate> delegate;
 
 
-/** 播放器 */
-@property (nonatomic, strong) AVAudioPlayer *player;
-
 /** 音乐总时间长度 */
 @property (nonatomic, assign) NSTimeInterval totalTime;
 
 /** 当前播放时间 */
 @property (nonatomic, assign) NSTimeInterval currentTime;
-
-
-/** 音乐列表 */
-@property (nonatomic, strong) NSArray *musics;
 
 /** 是否正在播放 */
 @property (nonatomic, assign, readonly) BOOL isPlaying;

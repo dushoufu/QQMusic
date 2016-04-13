@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QMPlayerController">
             <connections>
+                <outlet property="backgroundImage" destination="WcB-Ly-Ek8" id="KnI-Mf-iaN"/>
                 <outlet property="currentTime" destination="F8s-gg-FiF" id="Ag2-u2-V0b"/>
                 <outlet property="playButton" destination="arC-dt-fIU" id="48p-oH-jrA"/>
                 <outlet property="sliderLeft" destination="hs0-oE-75s" id="GOi-r3-Q9Y"/>
@@ -178,7 +179,7 @@
                                 </mask>
                             </variation>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="歌词" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-ee-jfL">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="歌词加载失败" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8xv-ee-jfL" userLabel="lyricLine" customClass="QMLyricLine">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="20" id="Jlu-5N-f3F"/>
@@ -211,8 +212,12 @@
                         <constraint firstItem="aXU-84-z4m" firstAttribute="top" secondItem="fKL-C7-V5P" secondAttribute="bottom" constant="20" id="MWP-nm-Jtj"/>
                         <constraint firstItem="fKL-C7-V5P" firstAttribute="centerY" secondItem="QMC-hF-mSU" secondAttribute="centerY" id="N9F-b9-eWm"/>
                         <constraint firstItem="8Cn-2w-KWL" firstAttribute="centerX" secondItem="vEZ-t4-Ubg" secondAttribute="centerX" id="XCK-wG-frc"/>
+                        <constraint firstItem="8xv-ee-jfL" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="vEZ-t4-Ubg" secondAttribute="leading" constant="30" id="jXC-kR-ccD"/>
                         <constraint firstItem="aXU-84-z4m" firstAttribute="centerX" secondItem="vEZ-t4-Ubg" secondAttribute="centerX" id="klj-S5-Btv"/>
                         <constraint firstItem="fKL-C7-V5P" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QMC-hF-mSU" secondAttribute="trailing" id="na9-Pj-bEw"/>
+                        <constraint firstItem="8xv-ee-jfL" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="vEZ-t4-Ubg" secondAttribute="trailing" constant="152" id="nlv-1M-uBz">
+                            <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
+                        </constraint>
                         <constraint firstItem="aXU-84-z4m" firstAttribute="centerY" secondItem="fxp-ju-vcw" secondAttribute="centerY" id="sph-GY-6J8"/>
                         <constraint firstAttribute="bottom" secondItem="8xv-ee-jfL" secondAttribute="bottom" constant="50" id="tPg-QD-q5E"/>
                         <constraint firstItem="KuZ-YD-aEs" firstAttribute="leading" secondItem="aXU-84-z4m" secondAttribute="trailing" constant="10" id="u2W-zU-mZ7"/>
@@ -250,6 +255,8 @@
                             <exclude reference="xZA-x4-Xlq"/>
                             <exclude reference="zaq-3h-f1Q"/>
                             <exclude reference="2EG-kd-fdX"/>
+                            <exclude reference="jXC-kR-ccD"/>
+                            <exclude reference="nlv-1M-uBz"/>
                             <exclude reference="tPg-QD-q5E"/>
                         </mask>
                     </variation>
@@ -283,11 +290,14 @@
                             <include reference="xZA-x4-Xlq"/>
                             <include reference="zaq-3h-f1Q"/>
                             <include reference="2EG-kd-fdX"/>
+                            <include reference="jXC-kR-ccD"/>
+                            <include reference="nlv-1M-uBz"/>
                             <include reference="tPg-QD-q5E"/>
                         </mask>
                     </variation>
                     <connections>
                         <outlet property="albumCover" destination="8Cn-2w-KWL" id="R3U-8n-JN5"/>
+                        <outlet property="lyricLine" destination="8xv-ee-jfL" id="f73-1U-ZoN"/>
                         <outlet property="singerLabel" destination="aXU-84-z4m" id="V68-EP-SJy"/>
                         <outlet property="titleLabel" destination="fKL-C7-V5P" id="uQx-Rv-p0v"/>
                     </connections>
