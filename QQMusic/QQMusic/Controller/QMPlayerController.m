@@ -13,6 +13,8 @@
 
 #import "QMTopDisplayView.h"
 
+#import "QMMusics.h"
+
 #import <AVFoundation/AVFoundation.h>
 
 @interface QMPlayerController () <QMMusicPlayerDelegate>
@@ -84,6 +86,7 @@
     
     //开始动画
     [self.topView startRotation];
+    
 }
 
 
@@ -161,18 +164,9 @@
 - (IBAction)play {
     
     if ([self.player pause]) {  //暂停
-        //暂停定时器
-        self.timer.fireDate = [NSDate distantFuture];
-        
-        //暂停动画
-        [self.topView pauseRotation];
         
     } else if ([self.player play]) {    //播放
-        //恢复定时器
-        self.timer.fireDate = [NSDate distantPast];
         
-        //恢复动画
-        [self.topView resumeRotation];
     }
 }
 
@@ -200,7 +194,7 @@
     
     self.sliderLeft.width = (self.player.currentTime / self.player.totalTime) * self.sliderRight.width;
     
-//    NSLog(@"......%f", self.sliderLeft.width);
+    NSLog(@"......%f", self.sliderLeft.width);
     
     self.sliderThumb.centerX = CGRectGetMaxX(self.sliderLeft.frame);
     
@@ -209,13 +203,16 @@
 
 #pragma mark - 跳转控制器
 /** 显示控制器 */
-- (void)show {
+- (void)showWithIndexNumber:(NSInteger)indexNumber {
     
     //通过动画的方式显示出窗口
     [UIView animateWithDuration:0.5 animations:^{
         //
         self.view.transform = CGAffineTransformIdentity;
     }];
+    
+    //并播放索引的音乐
+    [self.player playWithIndexNumber:indexNumber];
 }
 
 - (IBAction)back {
@@ -237,6 +234,11 @@
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_normal"] forState:UIControlStateNormal];
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_highlight"] forState:UIControlStateHighlighted];
         
+        //恢复定时器
+        self.timer.fireDate = [NSDate distantPast];
+        
+        //恢复动画
+        [self.topView resumeRotation];
         
     } else {    //暂停
         
@@ -244,9 +246,23 @@
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_normal"] forState:UIControlStateNormal];
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_highlight"] forState:UIControlStateHighlighted];
         
+        //暂停定时器
+        self.timer.fireDate = [NSDate distantFuture];
+        
+        //暂停动画
+        [self.topView pauseRotation];
+        
     }
 }
 
+- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingModel:(QMMusics *)playingModel {
+    
+    //设置歌曲信息
+    self.topView.title = playingModel.name;
+    self.topView.singer = playingModel.singer;
+    self.topView.singerIcon = playingModel.singerIcon;
+    
+}
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
     

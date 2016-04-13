@@ -16,13 +16,17 @@ typedef enum : NSUInteger {
 
 
 
-@class AVAudioPlayer, QMMusicPlayer;
+@class AVAudioPlayer, QMMusicPlayer, QMMusics;
 
 @protocol QMMusicPlayerDelegate <NSObject>
 
 @optional
 //音乐播放状态
 - (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus;
+
+//切换音乐
+- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingModel:(QMMusics *)playingModel;
+
 
 @end
 

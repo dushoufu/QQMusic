@@ -85,6 +85,9 @@ static QMMusicPlayer *instance = nil;
     
     self.player.delegate = self;
     
+    //开始播放音乐 (通知代理)
+    [self.delegate musicPlayer:self playingModel:music];
+    
     
     //播放音乐
     [self play];

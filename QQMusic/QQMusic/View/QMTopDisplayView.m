@@ -36,6 +36,13 @@
     self.singerLabel.text = singer;
 }
 
+- (void)setSingerIcon:(NSString *)singerIcon {
+    
+    _singerIcon = singerIcon;
+    
+    self.albumCover.image = [UIImage imageNamed:singerIcon];
+}
+
 #pragma mark - 动画操作
 - (void)startRotation {
     

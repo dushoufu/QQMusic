@@ -10,7 +10,6 @@
 #import "QMMusics.h"
 #import "QMMusicCell.h"
 
-#import "QMMusicPlayer.h"
 #import "QMPlayerController.h"
 
 #import <AVFoundation/AVFoundation.h>
@@ -19,9 +18,6 @@
 
 /** 歌曲信息 */
 @property (nonatomic, strong) NSArray *musics;
-
-/** 播放器 */
-@property (nonatomic, strong) QMMusicPlayer *player;
 
 /** 播放器控制器 */
 @property (nonatomic, strong) QMPlayerController *playerController;
@@ -65,27 +61,11 @@
 }
 
 
-- (QMMusicPlayer *)player {
-    
-    if (_player == nil) {
-        //
-        
-        _player = [QMMusicPlayer shareMusicPlayer];
-    }
-    return _player;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //设置导航栏主题色
-    [UINavigationBar appearance].barTintColor = [UIColor greenColor];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-    [UINavigationBar appearance].barTintColor = [UIColor greenColor];
-}
 
 
 #pragma mark - 数据源方法
@@ -108,12 +88,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //跳转到播放界面,并且播放音乐
     
-    
-    [self.playerController show];
-
-    
-    [self.player playWithIndexNumber:indexPath.row];
-    
+    //通过懒加载的方式跳转到播放界面
+    [self.playerController showWithIndexNumber:indexPath.row];
     
     
 }
