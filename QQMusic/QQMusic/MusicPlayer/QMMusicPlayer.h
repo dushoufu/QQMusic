@@ -8,25 +8,40 @@
 
 #import <Foundation/Foundation.h>
 
-@class AVAudioPlayer;
+
+typedef enum : NSUInteger {
+    kQMMusicPlayerStatusPlaying,
+    kQMMusicPlayerStatusPause,
+} QMMusicPlayerStatus;
+
+
+
+@class AVAudioPlayer, QMMusicPlayer;
+
+@protocol QMMusicPlayerDelegate <NSObject>
+
+@optional
+//音乐播放状态
+- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus;
+
+@end
+
+
 
 @interface QMMusicPlayer : NSObject
+
+/** 代理 */
+@property (nonatomic, weak) id<QMMusicPlayerDelegate> delegate;
+
 
 /** 播放器 */
 @property (nonatomic, strong) AVAudioPlayer *player;
 
 /** 音乐总时间长度 */
-@property (nonatomic, copy) NSString *totalTime;
+@property (nonatomic, assign) NSTimeInterval totalTime;
 
 /** 当前播放时间 */
-@property (nonatomic, copy) NSString *currentTime;
-
-/** 音乐总时间长度 */
-@property (nonatomic, assign) NSTimeInterval totaltime;
-
-/** 当前播放时间 */
-@property (nonatomic, assign) NSTimeInterval currenttime;
-
+@property (nonatomic, assign) NSTimeInterval currentTime;
 
 
 /** 音乐列表 */
@@ -39,9 +54,10 @@
 + (instancetype)shareMusicPlayer;
 
 /** 开始播放音乐 */
-- (BOOL)playWithFileName:(NSString *)fileName;
-
 - (BOOL)playWithIndexNumber:(NSInteger)IndexNumber;
+
+/** 指定时间播放 */
+- (BOOL)playAtTime:(NSTimeInterval)time;
 
 /** 暂停 */
 - (BOOL)pause;
@@ -54,7 +70,5 @@
 
 /** 上一曲 */
 - (void)preOne;
-
-- (BOOL)playAtTime:(NSTimeInterval)time;
 
 @end

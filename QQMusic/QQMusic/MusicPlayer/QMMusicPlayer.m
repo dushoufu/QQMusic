@@ -67,38 +67,6 @@ static QMMusicPlayer *instance = nil;
     [self playWithIndexNumber:_playingIndex];
 }
 
-//是否正在播放
-- (BOOL)isPlaying {
-    
-    return [self.player isPlaying];
-}
-
-- (BOOL)playAtTime:(NSTimeInterval)time {
-    
-    return [self.player playAtTime:time];
-}
-
-
-/** 通过文件名播放音乐 */
-- (BOOL)playWithFileName:(NSString *)fileName {
-    
-    //
-    
-    //从bundle中加载音乐 (bundle: app的包文件夹中)
-    NSString *filePath = [[NSBundle mainBundle] pathForResource:fileName ofType:nil];
-    
-    //将路径转换成URL,并且处理中文路径问题
-    NSURL *url = [NSURL fileURLWithPath:[filePath stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
-    NSError *error = nil;
-    
-    self.player = [[AVAudioPlayer alloc] initWithContentsOfURL:url error:&error];
-    
-    //播放音乐
-    [self.player play];
-    
-    return error ? NO : YES;
-}
 
 /** 通过索引播放音乐 */
 - (BOOL)playWithIndexNumber:(NSInteger)IndexNumber {
@@ -117,15 +85,21 @@ static QMMusicPlayer *instance = nil;
     
     self.player.delegate = self;
     
-    //显示歌曲信息
     
     //播放音乐
-    [self.player play];
+    [self play];
     
     _playingIndex = IndexNumber;
     
     return error ? NO : YES;
 }
+
+/** 指定时间播放 */
+- (BOOL)playAtTime:(NSTimeInterval)time {
+    
+    return [self.player playAtTime:time];
+}
+
 
 
 - (BOOL)pause {
@@ -134,6 +108,9 @@ static QMMusicPlayer *instance = nil;
     if ([self.player isPlaying]) {
         //暂停
         [self.player pause];
+        
+        //记录播放状态
+        [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPause];
         
         return YES;
     }
@@ -147,7 +124,10 @@ static QMMusicPlayer *instance = nil;
     if (![self.player isPlaying]) {
         //播放
         [self.player play];
-        //
+        
+        //记录播放状态
+        [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPlaying];
+        
         return YES;
     }
     return NO;
@@ -175,43 +155,27 @@ static QMMusicPlayer *instance = nil;
     return instance;
 }
 
-- (NSString *)currentTime {
+#pragma mark - 重写get方法
+- (NSTimeInterval)totalTime {
     
-    NSTimeInterval time = [self.player currentTime];
-    //转换格式
-    NSInteger min = (NSInteger)time / 60;
-    NSInteger sec = (NSInteger)time % 60;
-    
-    //拼接字符串
-    NSString *timeStr = [NSString stringWithFormat:@"%02ld:%02ld", min, sec];
-    
-    return timeStr;
-    
-    
-    
+    return self.player.duration;
 }
 
-- (NSString *)totalTime {
-    
-    NSTimeInterval time = [self.player duration];
-    //转换格式
-    NSInteger min = (NSInteger)time / 60;
-    NSInteger sec = (NSInteger)time % 60;
-    
-    //拼接字符串
-    NSString *timeStr = [NSString stringWithFormat:@"%02ld:%02ld", min, sec];
-    
-    return timeStr;
-}
-
-- (NSTimeInterval)currenttime {
+- (NSTimeInterval)currentTime {
     
     return self.player.currentTime;
 }
 
-- (NSTimeInterval)totaltime {
+//是否正在播放
+- (BOOL)isPlaying {
     
-    return self.player.duration;
+    return [self.player isPlaying];
+}
+
+#pragma mark - 重写set方法
+- (void)setCurrentTime:(NSTimeInterval)currentTime {
+    
+    self.player.currentTime = currentTime;
 }
 
 #pragma mark - 代理方法

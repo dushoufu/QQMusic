@@ -65,6 +65,7 @@
 		B8783A211CBCC0D900A47C6F /* QMMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A201CBCC0D900A47C6F /* QMMusicCell.m */; };
 		B8783A241CBD074E00A47C6F /* QMTopDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A231CBD074E00A47C6F /* QMTopDisplayView.m */; };
 		B8783A2B1CBD238E00A47C6F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */; };
+		B8D6E25F1CBE1AE0004C287C /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */; };
 		B8EA57291CBBB5A000396142 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EA57281CBBB5A000396142 /* main.m */; };
 		B8EA572C1CBBB5A000396142 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EA572B1CBBB5A000396142 /* AppDelegate.m */; };
 		B8EA572F1CBBB5A000396142 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B8EA572E1CBBB5A000396142 /* ViewController.m */; };
@@ -137,6 +138,8 @@
 		B8783A231CBD074E00A47C6F /* QMTopDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMTopDisplayView.m; sourceTree = "<group>"; };
 		B8783A291CBD238E00A47C6F /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		B8D6E25D1CBE1AE0004C287C /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		B8EA57241CBBB5A000396142 /* QQMusic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QQMusic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8EA57281CBBB5A000396142 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B8EA572A1CBBB5A000396142 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -285,6 +288,8 @@
 			children = (
 				B8783A291CBD238E00A47C6F /* UIView+Extension.h */,
 				B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */,
+				B8D6E25D1CBE1AE0004C287C /* NSString+Extension.h */,
+				B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				B87839AE1CBCC0C200A47C6F /* QMPlayerController.m in Sources */,
 				B8783A211CBCC0D900A47C6F /* QMMusicCell.m in Sources */,
 				B87839A61CBCBBDD00A47C6F /* QMMusicPlayer.m in Sources */,
+				B8D6E25F1CBE1AE0004C287C /* NSString+Extension.m in Sources */,
 				B8EA572C1CBBB5A000396142 /* AppDelegate.m in Sources */,
 				B8EA57291CBBB5A000396142 /* main.m in Sources */,
 				B87839B31CBCC0CB00A47C6F /* QMMusics.m in Sources */,

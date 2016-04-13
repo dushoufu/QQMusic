@@ -11,12 +11,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QMPlayerController">
             <connections>
                 <outlet property="currentTime" destination="F8s-gg-FiF" id="Ag2-u2-V0b"/>
-                <outlet property="panPlayGesture" destination="mgN-WQ-hhF" id="f8g-Wh-fp2"/>
                 <outlet property="playButton" destination="arC-dt-fIU" id="48p-oH-jrA"/>
-                <outlet property="slderRight" destination="LBQ-0Q-OX9" id="no5-xE-yXc"/>
                 <outlet property="sliderLeft" destination="hs0-oE-75s" id="GOi-r3-Q9Y"/>
+                <outlet property="sliderRight" destination="LBQ-0Q-OX9" id="74u-eX-flA"/>
                 <outlet property="sliderThumb" destination="eIT-jy-oqt" id="eFf-7j-VqW"/>
-                <outlet property="tapPlayGesture" destination="Rjn-He-j1f" id="Z2g-vC-93r"/>
+                <outlet property="topView" destination="vEZ-t4-Ubg" id="g7x-aC-zAa"/>
                 <outlet property="totalTime" destination="pXF-pi-ez2" id="ewp-sz-LbL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -36,7 +35,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vEZ-t4-Ubg" userLabel="Top Display" customClass="QMTopDisplayView">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-hF-mSU" userLabel="close">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QMC-hF-mSU" userLabel="close">
                             <rect key="frame" x="54" y="65" width="34" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="60" id="Hig-YV-yFA"/>
@@ -58,6 +57,7 @@
                             </variation>
                             <connections>
                                 <action selector="back" destination="-1" eventType="touchUpInside" id="Xbr-e8-vY1"/>
+                                <outletCollection property="gestureRecognizers" destination="62Q-Wd-guT" appends="YES" id="hSw-hY-j7s"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="63U-PB-7IL" userLabel="more">
@@ -210,23 +210,23 @@
                             <exclude reference="KuZ-YD-aEs"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="KDH-a6-UNb"/>
-                            <exclude reference="x4p-8a-nOn"/>
-                            <exclude reference="IIC-Go-OvN"/>
+                            <exclude reference="xZA-x4-Xlq"/>
+                            <exclude reference="zaq-3h-f1Q"/>
+                            <exclude reference="MWP-nm-Jtj"/>
+                            <exclude reference="klj-S5-Btv"/>
+                            <exclude reference="sph-GY-6J8"/>
                             <exclude reference="2xU-ye-svg"/>
                             <exclude reference="CL8-FO-aDt"/>
                             <exclude reference="N9F-b9-eWm"/>
                             <exclude reference="na9-Pj-bEw"/>
+                            <exclude reference="KDH-a6-UNb"/>
+                            <exclude reference="x4p-8a-nOn"/>
                             <exclude reference="24e-I6-ppt"/>
                             <exclude reference="6w8-fO-AnJ"/>
                             <exclude reference="XCK-wG-frc"/>
-                            <exclude reference="MWP-nm-Jtj"/>
-                            <exclude reference="klj-S5-Btv"/>
-                            <exclude reference="sph-GY-6J8"/>
                             <exclude reference="MVx-Js-rD6"/>
                             <exclude reference="u2W-zU-mZ7"/>
-                            <exclude reference="xZA-x4-Xlq"/>
-                            <exclude reference="zaq-3h-f1Q"/>
+                            <exclude reference="IIC-Go-OvN"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -240,23 +240,23 @@
                             <include reference="KuZ-YD-aEs"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="KDH-a6-UNb"/>
-                            <include reference="x4p-8a-nOn"/>
-                            <include reference="IIC-Go-OvN"/>
+                            <include reference="xZA-x4-Xlq"/>
+                            <include reference="zaq-3h-f1Q"/>
+                            <include reference="MWP-nm-Jtj"/>
+                            <include reference="klj-S5-Btv"/>
+                            <include reference="sph-GY-6J8"/>
                             <include reference="2xU-ye-svg"/>
                             <include reference="CL8-FO-aDt"/>
                             <include reference="N9F-b9-eWm"/>
                             <include reference="na9-Pj-bEw"/>
+                            <include reference="KDH-a6-UNb"/>
+                            <include reference="x4p-8a-nOn"/>
                             <include reference="24e-I6-ppt"/>
                             <include reference="6w8-fO-AnJ"/>
                             <include reference="XCK-wG-frc"/>
-                            <include reference="MWP-nm-Jtj"/>
-                            <include reference="klj-S5-Btv"/>
-                            <include reference="sph-GY-6J8"/>
                             <include reference="MVx-Js-rD6"/>
                             <include reference="u2W-zU-mZ7"/>
-                            <include reference="xZA-x4-Xlq"/>
-                            <include reference="zaq-3h-f1Q"/>
+                            <include reference="IIC-Go-OvN"/>
                         </mask>
                     </variation>
                     <connections>
@@ -347,10 +347,10 @@
                                 <outletCollection property="gestureRecognizers" destination="mgN-WQ-hhF" appends="YES" id="7L6-Vb-MiC"/>
                             </connections>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="04:22" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXF-pi-ez2" userLabel="totaltime">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pXF-pi-ez2" userLabel="totaltime">
                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="36" id="G2r-hk-4BM"/>
+                                <constraint firstAttribute="width" constant="37" id="G2r-hk-4BM"/>
                                 <constraint firstAttribute="height" constant="16" id="ZHZ-hV-H1C"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -369,7 +369,7 @@
                                 </mask>
                             </variation>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arC-dt-fIU" userLabel="play">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="arC-dt-fIU" userLabel="play">
                             <rect key="frame" x="268" y="40" width="64" height="64"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="64" id="grO-23-6nY"/>
@@ -393,7 +393,7 @@
                                 <action selector="play" destination="-1" eventType="touchUpInside" id="rnK-qf-ypR"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxC-ha-9fa" userLabel="next">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RxC-ha-9fa" userLabel="next">
                             <rect key="frame" x="340" y="40" width="64" height="64"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="64" id="BOt-LA-mHq"/>
@@ -417,7 +417,7 @@
                                 <action selector="next" destination="-1" eventType="touchUpInside" id="3UA-bU-c5h"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gt-Ic-ZIw" userLabel="pre">
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6gt-Ic-ZIw" userLabel="pre">
                             <rect key="frame" x="196" y="40" width="64" height="64"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="64" id="lXW-gh-7gk"/>
@@ -552,7 +552,7 @@
                         <constraint firstItem="4zU-Oh-snP" firstAttribute="leading" secondItem="IXs-tz-lqi" secondAttribute="trailing" constant="20" id="Hwk-s8-Ki0"/>
                         <constraint firstItem="4zU-Oh-snP" firstAttribute="centerY" secondItem="YTr-ai-e6k" secondAttribute="centerY" id="LRl-7c-JYv"/>
                         <constraint firstItem="Pqk-jY-mra" firstAttribute="leading" secondItem="YTr-ai-e6k" secondAttribute="trailing" constant="20" id="LeA-J8-Rlv"/>
-                        <constraint firstItem="hs0-oE-75s" firstAttribute="trailing" secondItem="eIT-jy-oqt" secondAttribute="centerX" id="MGw-Y2-on4"/>
+                        <constraint firstItem="eIT-jy-oqt" firstAttribute="centerX" secondItem="hs0-oE-75s" secondAttribute="trailing" id="MGw-Y2-on4"/>
                         <constraint firstItem="Pqk-jY-mra" firstAttribute="centerY" secondItem="YTr-ai-e6k" secondAttribute="centerY" id="NPo-L1-hfe"/>
                         <constraint firstItem="LBQ-0Q-OX9" firstAttribute="leading" secondItem="F8s-gg-FiF" secondAttribute="trailing" constant="20" id="PJz-hS-VJU"/>
                         <constraint firstItem="X96-ZF-bnS" firstAttribute="leading" secondItem="Pqk-jY-mra" secondAttribute="trailing" constant="20" id="RA7-Tr-3SZ"/>
@@ -587,33 +587,33 @@
                             <exclude reference="Pqk-jY-mra"/>
                         </mask>
                         <mask key="constraints">
+                            <exclude reference="Hwk-s8-Ki0"/>
+                            <exclude reference="LRl-7c-JYv"/>
+                            <exclude reference="Gox-4J-wll"/>
+                            <exclude reference="V3D-SQ-qOj"/>
+                            <exclude reference="LeA-J8-Rlv"/>
+                            <exclude reference="NPo-L1-hfe"/>
+                            <exclude reference="RA7-Tr-3SZ"/>
+                            <exclude reference="fXJ-5K-qvQ"/>
+                            <exclude reference="rPw-v7-4Rk"/>
+                            <exclude reference="zfC-hH-kye"/>
                             <exclude reference="4rq-hI-KJJ"/>
                             <exclude reference="kUY-pr-AtO"/>
+                            <exclude reference="Yaz-qT-Lbb"/>
+                            <exclude reference="qDE-fr-m67"/>
+                            <exclude reference="tMq-aV-30s"/>
                             <exclude reference="PJz-hS-VJU"/>
                             <exclude reference="X27-BM-VmR"/>
                             <exclude reference="D56-rY-XAz"/>
                             <exclude reference="MGw-Y2-on4"/>
                             <exclude reference="Wwr-7u-azn"/>
                             <exclude reference="xSb-Ua-ZA9"/>
-                            <exclude reference="LeA-J8-Rlv"/>
-                            <exclude reference="NPo-L1-hfe"/>
                             <exclude reference="HLq-PM-Uno"/>
                             <exclude reference="SZw-SB-UlC"/>
                             <exclude reference="enm-Kz-ksF"/>
                             <exclude reference="r7o-xR-XqY"/>
-                            <exclude reference="RA7-Tr-3SZ"/>
-                            <exclude reference="fXJ-5K-qvQ"/>
-                            <exclude reference="rPw-v7-4Rk"/>
-                            <exclude reference="zfC-hH-kye"/>
                             <exclude reference="ts4-sW-lIg"/>
                             <exclude reference="yOW-k8-8dP"/>
-                            <exclude reference="Gox-4J-wll"/>
-                            <exclude reference="V3D-SQ-qOj"/>
-                            <exclude reference="Hwk-s8-Ki0"/>
-                            <exclude reference="LRl-7c-JYv"/>
-                            <exclude reference="Yaz-qT-Lbb"/>
-                            <exclude reference="qDE-fr-m67"/>
-                            <exclude reference="tMq-aV-30s"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=compact">
@@ -630,33 +630,33 @@
                             <include reference="Pqk-jY-mra"/>
                         </mask>
                         <mask key="constraints">
+                            <include reference="Hwk-s8-Ki0"/>
+                            <include reference="LRl-7c-JYv"/>
+                            <include reference="Gox-4J-wll"/>
+                            <include reference="V3D-SQ-qOj"/>
+                            <include reference="LeA-J8-Rlv"/>
+                            <include reference="NPo-L1-hfe"/>
+                            <include reference="RA7-Tr-3SZ"/>
+                            <include reference="fXJ-5K-qvQ"/>
+                            <include reference="rPw-v7-4Rk"/>
+                            <include reference="zfC-hH-kye"/>
                             <include reference="4rq-hI-KJJ"/>
                             <include reference="kUY-pr-AtO"/>
+                            <include reference="Yaz-qT-Lbb"/>
+                            <include reference="qDE-fr-m67"/>
+                            <include reference="tMq-aV-30s"/>
                             <include reference="PJz-hS-VJU"/>
                             <include reference="X27-BM-VmR"/>
                             <include reference="D56-rY-XAz"/>
                             <include reference="MGw-Y2-on4"/>
                             <include reference="Wwr-7u-azn"/>
                             <include reference="xSb-Ua-ZA9"/>
-                            <include reference="LeA-J8-Rlv"/>
-                            <include reference="NPo-L1-hfe"/>
                             <include reference="HLq-PM-Uno"/>
                             <include reference="SZw-SB-UlC"/>
                             <include reference="enm-Kz-ksF"/>
                             <include reference="r7o-xR-XqY"/>
-                            <include reference="RA7-Tr-3SZ"/>
-                            <include reference="fXJ-5K-qvQ"/>
-                            <include reference="rPw-v7-4Rk"/>
-                            <include reference="zfC-hH-kye"/>
                             <include reference="ts4-sW-lIg"/>
                             <include reference="yOW-k8-8dP"/>
-                            <include reference="Gox-4J-wll"/>
-                            <include reference="V3D-SQ-qOj"/>
-                            <include reference="Hwk-s8-Ki0"/>
-                            <include reference="LRl-7c-JYv"/>
-                            <include reference="Yaz-qT-Lbb"/>
-                            <include reference="qDE-fr-m67"/>
-                            <include reference="tMq-aV-30s"/>
                         </mask>
                     </variation>
                 </view>
@@ -731,6 +731,11 @@
         <panGestureRecognizer minimumNumberOfTouches="1" id="mgN-WQ-hhF" userLabel="退拽播放">
             <connections>
                 <action selector="panPlay:" destination="-1" id="6Jl-Te-mPO"/>
+            </connections>
+        </panGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="62Q-Wd-guT" userLabel="关闭播放界面">
+            <connections>
+                <action selector="panClose:" destination="-1" id="CtM-sM-zJN"/>
             </connections>
         </panGestureRecognizer>
     </objects>

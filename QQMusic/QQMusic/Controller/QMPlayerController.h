@@ -10,8 +10,6 @@
 
 @interface QMPlayerController : UIViewController
 
-- (void)updateInfo;
-
 /** 显示控制器的View */
 - (void)show;
 
