@@ -58,19 +58,19 @@ static QMMusicPlayer *instance = nil;
         return;
     }
     
-    _playingIndex = playingIndex;
+//    _playingIndex = playingIndex;
     //判断是否越界
-    if (_playingIndex >= (NSInteger)self.musics.count) {
+    if (playingIndex >= (NSInteger)self.musics.count) {
         //
-        _playingIndex = 0;
+        playingIndex = 0;
         
-    } else if (_playingIndex < 0) {
+    } else if (playingIndex < 0) {
         
-        _playingIndex = self.musics.count - 1;
+        playingIndex = self.musics.count - 1;
     }
     
     //切换到下一曲/上一曲
-    [self playWithIndexNumber:_playingIndex];
+    [self playWithIndexNumber:playingIndex];
 }
 
 #pragma mark - 单例创建播放器
@@ -90,6 +90,12 @@ static QMMusicPlayer *instance = nil;
 /** 通过索引播放音乐 */
 - (BOOL)playWithIndexNumber:(NSInteger)IndexNumber {
     
+    //判断是否是同一首歌
+    if (IndexNumber == _playingIndex) {
+        //
+        return YES;
+    }
+    
     //从bundle中加载音乐 (bundle: app的包文件夹中)
     QMMusics *music = self.musics[IndexNumber];
     
@@ -105,13 +111,21 @@ static QMMusicPlayer *instance = nil;
     self.player.delegate = self;
     
     //开始播放音乐 (通知代理)
-    [self.delegate musicPlayer:self playingModel:music];
+//    if ([self.delegate respondsToSelector:@selector(musicPlayer:playingModel:)]) {
+//        //
+//        [self.delegate musicPlayer:self playingModel:music];
+//    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"QMMusicPlayerPlayingChanged" object:nil userInfo:@{@"playingModel" : music}];
     
     
     //播放音乐
-    [self play];
+    if ([self play]) {
+        //
+        //不能用set方法,不然会造成死循环 (记录当前正在播放的歌曲)
+        _playingIndex = IndexNumber;
+    }
     
-    _playingIndex = IndexNumber;
     
     return error ? NO : YES;
 }
@@ -129,8 +143,18 @@ static QMMusicPlayer *instance = nil;
         //暂停
         [self.player pause];
         
-        //记录播放状态
-        [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPause];
+        //通知代理 当前 播放状态
+//        if ([self.delegate respondsToSelector:@selector(musicPlayer:playingStatus:)]) {
+//            //
+//            [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPause];
+//        }
+        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"QMMusicPlayerStatusPause" object:nil];
+        
+//        _status = kQMMusicPlayerStatusPause;
+#warning 要使用观察者模式, 必须通过 set方法 或者 KVC 来改变 属性的值
+        [self setValue:@(kQMMusicPlayerStatusPause) forKeyPath:@"status"];
+        
         
         return YES;
     }
@@ -145,8 +169,17 @@ static QMMusicPlayer *instance = nil;
         //播放
         [self.player play];
         
-        //记录播放状态
-        [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPlaying];
+        //通知代理 当前 播放状态
+//        if ([self.delegate respondsToSelector:@selector(musicPlayer:playingStatus:)]) {
+//            //
+//            [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPlaying];
+//        }
+        
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"QMMusicPlayerStatusPlaying" object:nil];
+        
+//        _status = kQMMusicPlayerStatusPlaying;
+#warning 要使用观察者模式, 必须通过 set方法 或者 KVC 来改变 属性的值
+        [self setValue:@(kQMMusicPlayerStatusPlaying) forKeyPath:@"status"];
         
         return YES;
     }

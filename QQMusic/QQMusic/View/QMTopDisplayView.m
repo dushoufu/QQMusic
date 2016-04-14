@@ -109,14 +109,6 @@
 
 
 #pragma mark - 初始化方法
-- (void)awakeFromNib {
-    
-//    [self startRotation];
-    
-    //设置代理
-    
-}
-
 
 - (void)layoutSubviews {
     

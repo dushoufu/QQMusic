@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+//NSString * const QMMusicPlayerPlayingChanged = @"QMMusicPlayerPlayingChanged";
+//NSString * const QMMusicPlayerStatusPlaying = @"QMMusicPlayerStatusPlaying";
+//NSString * const QMMusicPlayerStatusPause = @"QMMusicPlayerStatusPause";
+
 
 typedef enum : NSUInteger {
     kQMMusicPlayerStatusPlaying,
@@ -18,14 +22,15 @@ typedef enum : NSUInteger {
 
 @class AVAudioPlayer, QMMusicPlayer, QMMusics;
 
+#warning 代理是 一对一, 如果要 多对多, 需要使用通知
 @protocol QMMusicPlayerDelegate <NSObject>
 
 @optional
 //音乐播放状态
-- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus;
+//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus;
 
 //切换音乐
-- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingModel:(QMMusics *)playingModel;
+//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingModel:(QMMusics *)playingModel;
 
 
 @end
@@ -35,7 +40,7 @@ typedef enum : NSUInteger {
 @interface QMMusicPlayer : NSObject
 
 /** 代理 */
-@property (nonatomic, weak) id<QMMusicPlayerDelegate> delegate;
+//@property (nonatomic, weak) id<QMMusicPlayerDelegate> delegate;
 
 
 /** 音乐总时间长度 */
@@ -44,8 +49,8 @@ typedef enum : NSUInteger {
 /** 当前播放时间 */
 @property (nonatomic, assign) NSTimeInterval currentTime;
 
-/** 是否正在播放 */
-@property (nonatomic, assign, readonly) BOOL isPlaying;
+/** 播放状态 */
+@property (nonatomic, assign, readonly) QMMusicPlayerStatus status;
 
 //通过"单例"创建音乐播放器类
 + (instancetype)shareMusicPlayer;
