@@ -101,7 +101,7 @@
     //重新渲染
     [self setNeedsDisplay];
     
-    NSLog(@",,,,,,");
+//    NSLog(@",,,,,,");
 }
 
 /** 懒加载播放器 */
@@ -113,6 +113,7 @@
         
 //        _player.delegate = self;
         
+        //添加观察者 监听播放状态
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
         
     }
@@ -135,7 +136,7 @@
 /** 监听播放状态 */
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
     
-    NSLog(@"%@", change);
+//    NSLog(@"%@", change);
     
     if ([change[@"new"] integerValue] == kQMMusicPlayerStatusPlaying) {
         //
@@ -145,6 +146,14 @@
         
         self.timer.fireDate = [NSDate distantFuture];
     }
+}
+
+- (void)dealloc {
+    
+    NSLog(@"%s", __func__);
+    
+    //移除观察者
+    [_player removeObserver:self forKeyPath:@"status"];
 }
 
 

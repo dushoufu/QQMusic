@@ -65,8 +65,8 @@
 		B8783A211CBCC0D900A47C6F /* QMMusicCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A201CBCC0D900A47C6F /* QMMusicCell.m */; };
 		B8783A241CBD074E00A47C6F /* QMTopDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A231CBD074E00A47C6F /* QMTopDisplayView.m */; };
 		B8783A2B1CBD238E00A47C6F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */; };
+		B87D3C8B1CBFC28D008ADD06 /* QMLyricView.m in Sources */ = {isa = PBXBuildFile; fileRef = B87D3C8A1CBFC28D008ADD06 /* QMLyricView.m */; };
 		B8D6E25F1CBE1AE0004C287C /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */; };
-		B8D6E2691CBE3BA9004C287C /* QMLyricView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E2681CBE3BA9004C287C /* QMLyricView.m */; };
 		B8D6E26C1CBE5444004C287C /* QMLyricLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E26B1CBE5444004C287C /* QMLyricLine.m */; };
 		B8D6E26F1CBE69BC004C287C /* QMLyric.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E26E1CBE69BC004C287C /* QMLyric.m */; };
 		B8D6E2721CBE6AB0004C287C /* QMLyricTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E2711CBE6AB0004C287C /* QMLyricTool.m */; };
@@ -81,7 +81,7 @@
 		B87839A41CBCBBDD00A47C6F /* QMMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMMusicPlayer.h; sourceTree = "<group>"; };
 		B87839A51CBCBBDD00A47C6F /* QMMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMMusicPlayer.m; sourceTree = "<group>"; };
 		B87839AB1CBCC0C200A47C6F /* QMPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMPlayerController.h; sourceTree = "<group>"; };
-		B87839AC1CBCC0C200A47C6F /* QMPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMPlayerController.m; sourceTree = "<group>"; };
+		B87839AC1CBCC0C200A47C6F /* QMPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = QMPlayerController.m; sourceTree = "<group>"; };
 		B87839AD1CBCC0C200A47C6F /* QMPlayerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QMPlayerController.xib; sourceTree = "<group>"; };
 		B87839B11CBCC0CB00A47C6F /* QMMusics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMMusics.h; sourceTree = "<group>"; };
 		B87839B21CBCC0CB00A47C6F /* QMMusics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMMusics.m; sourceTree = "<group>"; };
@@ -142,10 +142,10 @@
 		B8783A231CBD074E00A47C6F /* QMTopDisplayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMTopDisplayView.m; sourceTree = "<group>"; };
 		B8783A291CBD238E00A47C6F /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
 		B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		B87D3C891CBFC28D008ADD06 /* QMLyricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyricView.h; sourceTree = "<group>"; };
+		B87D3C8A1CBFC28D008ADD06 /* QMLyricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMLyricView.m; sourceTree = "<group>"; };
 		B8D6E25D1CBE1AE0004C287C /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
-		B8D6E2671CBE3BA9004C287C /* QMLyricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyricView.h; sourceTree = "<group>"; };
-		B8D6E2681CBE3BA9004C287C /* QMLyricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMLyricView.m; sourceTree = "<group>"; };
 		B8D6E26A1CBE5444004C287C /* QMLyricLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyricLine.h; sourceTree = "<group>"; };
 		B8D6E26B1CBE5444004C287C /* QMLyricLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMLyricLine.m; sourceTree = "<group>"; };
 		B8D6E26D1CBE69BC004C287C /* QMLyric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyric.h; sourceTree = "<group>"; };
@@ -314,10 +314,10 @@
 		B8D6E2661CBE3B5C004C287C /* Lyric */ = {
 			isa = PBXGroup;
 			children = (
-				B8D6E2671CBE3BA9004C287C /* QMLyricView.h */,
-				B8D6E2681CBE3BA9004C287C /* QMLyricView.m */,
 				B8D6E26A1CBE5444004C287C /* QMLyricLine.h */,
 				B8D6E26B1CBE5444004C287C /* QMLyricLine.m */,
+				B87D3C891CBFC28D008ADD06 /* QMLyricView.h */,
+				B87D3C8A1CBFC28D008ADD06 /* QMLyricView.m */,
 			);
 			path = Lyric;
 			sourceTree = "<group>";
@@ -495,13 +495,13 @@
 				B8D6E2721CBE6AB0004C287C /* QMLyricTool.m in Sources */,
 				B87839AE1CBCC0C200A47C6F /* QMPlayerController.m in Sources */,
 				B8783A211CBCC0D900A47C6F /* QMMusicCell.m in Sources */,
+				B87D3C8B1CBFC28D008ADD06 /* QMLyricView.m in Sources */,
 				B87839A61CBCBBDD00A47C6F /* QMMusicPlayer.m in Sources */,
 				B8D6E25F1CBE1AE0004C287C /* NSString+Extension.m in Sources */,
 				B8EA572C1CBBB5A000396142 /* AppDelegate.m in Sources */,
 				B8EA57291CBBB5A000396142 /* main.m in Sources */,
 				B87839B31CBCC0CB00A47C6F /* QMMusics.m in Sources */,
 				B8783A241CBD074E00A47C6F /* QMTopDisplayView.m in Sources */,
-				B8D6E2691CBE3BA9004C287C /* QMLyricView.m in Sources */,
 				B8D6E26F1CBE69BC004C287C /* QMLyric.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

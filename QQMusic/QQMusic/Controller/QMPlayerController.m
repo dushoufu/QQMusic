@@ -65,6 +65,7 @@
     return _player;
 }
 
+
 /** 初始化 */
 - (instancetype)init {
     
@@ -210,6 +211,22 @@
     }
     
 }
+
+///** 打开歌词界面 */
+//- (IBAction)panOpenLyric:(UIPanGestureRecognizer *)sender {
+//    
+//    if (sender.state == UIGestureRecognizerStateBegan) {
+//        //显示歌词控制器
+//        
+//    } else if (sender.state == UIGestureRecognizerStateChanged) {
+//        
+//        self.topView
+//        
+//    } else if (sender.state == UIGestureRecognizerStateEnded) {
+//        //
+//        
+//    }
+//}
 
 
 #pragma mark - 播放控制

@@ -10,18 +10,50 @@
 #import "QMPlayerController.h"
 #import "QMLyricLine.h"
 #import "QMLyricTool.h"
+#import "UIView+Extension.h"
+
+#import "QMLyricView.h"
 
 
-@interface QMTopDisplayView ()
+@interface QMTopDisplayView () <UIScrollViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *singerLabel;
 @property (nonatomic, weak) IBOutlet UIImageView *albumCover;
 @property (nonatomic, weak) IBOutlet QMLyricLine *lyricLine;
 
+@property (nonatomic, weak) IBOutlet UIView *leftView;
+@property (nonatomic, weak) IBOutlet UIView *rightView;
+
+@property (nonatomic, weak) QMLyricView *lyricView;
+
+
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic, assign) CGPoint startPoint;
+
+@property (nonatomic, assign) CGPoint currentPoint;
+
+
 @end
 
 @implementation QMTopDisplayView
+
+
+- (void)awakeFromNib {
+    
+    //创建歌词View
+    QMLyricView *lyricView = [[QMLyricView alloc] init];
+    
+    self.lyricView = lyricView;
+    
+//    lyricView.backgroundColor = [UIColor redColor];
+    
+    [self.scrollView addSubview:lyricView];
+}
+
+
+
 
 #pragma mark - 重写set方法
 - (void)setTitle:(NSString *)title {
@@ -49,12 +81,16 @@
     
     _lyric = lyric;
     
-    //
+    //获取歌词路径
     NSString *path = [[NSBundle mainBundle] pathForResource:lyric ofType:nil];
     
     NSString *lrc = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:nil];
     
-    self.lyricLine.lyricLines = [QMLyricTool lyricLinesWithLyricString:lrc];
+    //解析 并 传递 歌词
+    NSArray *lyricLines = [QMLyricTool lyricLinesWithLyricString:lrc];
+    self.lyricLine.lyricLines = lyricLines;
+    self.lyricView.lyricLines = lyricLines;
+    
 }
 
 #pragma mark - 动画操作
@@ -116,8 +152,34 @@
     
     //裁剪圆形头像
     self.albumCover.layer.cornerRadius = self.albumCover.bounds.size.width * 0.5;
-    
     self.albumCover.clipsToBounds = YES;
+    
+    //设置scrollView
+    self.scrollView.contentSize = CGSizeMake(self.scrollView.width * 2, self.scrollView.height);
+    
+    self.lyricView.frame = self.scrollView.bounds;
+    self.lyricView.x = CGRectGetMaxX(self.scrollView.frame);
+    
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+    //获取滚动偏移量
+    CGFloat offsetX = scrollView.contentOffset.x;
+    
+    //计算比例值
+    CGFloat scale = (self.width - offsetX) / scrollView.width;
+    
+    //显示和隐藏头像,行歌词,和歌手
+    self.lyricLine.alpha = scale;
+    self.albumCover.alpha = scale;
+    self.singerLabel.alpha = scale;
+    self.leftView.alpha = scale;
+    self.rightView.alpha = scale;
+    
+    
+    NSLog(@"%f", scrollView.contentOffset.x);
 }
 
 
