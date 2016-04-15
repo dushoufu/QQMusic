@@ -11,6 +11,6 @@
 @interface QMPlayerController : UIViewController
 
 /** 显示控制器的View */
-- (void)showWithIndexNumber:(NSInteger)indexNumber;
+- (void)show;
 
 @end

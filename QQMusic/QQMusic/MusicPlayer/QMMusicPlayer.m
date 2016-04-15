@@ -8,6 +8,7 @@
 
 #import "QMMusicPlayer.h"
 #import <AVFoundation/AVFoundation.h>
+#import "QMPlayerTimer.h"
 
 #import "QMMusics.h"
 
@@ -15,14 +16,11 @@ static QMMusicPlayer *instance = nil;
 
 @interface QMMusicPlayer () <AVAudioPlayerDelegate>
 
-/** 音乐列表 */
-@property (nonatomic, strong) NSArray *musics;
-
 /** 播放器 */
 @property (nonatomic, strong) AVAudioPlayer *player;
 
-/** 正在播放的索引 */
-@property (nonatomic, assign) NSInteger playingIndex;
+/** 定时器 */
+@property (nonatomic, strong) QMPlayerTimer *timer;
 
 @end
 
@@ -86,6 +84,16 @@ static QMMusicPlayer *instance = nil;
     return instance;
 }
 
+- (instancetype)init {
+    
+    if (self = [super init]) {
+        //
+        //创建定时器
+        self.timer = [QMPlayerTimer sharePlayerTimer];
+    }
+    return self;
+}
+
 #pragma mark - 音乐播放
 /** 通过索引播放音乐 */
 - (BOOL)playWithIndexNumber:(NSInteger)IndexNumber {
@@ -110,14 +118,10 @@ static QMMusicPlayer *instance = nil;
     
     self.player.delegate = self;
     
-    //开始播放音乐 (通知代理)
-//    if ([self.delegate respondsToSelector:@selector(musicPlayer:playingModel:)]) {
-//        //
-//        [self.delegate musicPlayer:self playingModel:music];
-//    }
+
+    [self.timer startTimer];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"QMMusicPlayerPlayingChanged" object:nil userInfo:@{@"playingModel" : music}];
-    
     
     //播放音乐
     if ([self play]) {
@@ -130,11 +134,7 @@ static QMMusicPlayer *instance = nil;
     return error ? NO : YES;
 }
 
-/** 指定时间播放 */
-- (BOOL)playAtTime:(NSTimeInterval)time {
-    
-    return [self.player playAtTime:time];
-}
+
 
 - (BOOL)pause {
     
@@ -143,18 +143,8 @@ static QMMusicPlayer *instance = nil;
         //暂停
         [self.player pause];
         
-        //通知代理 当前 播放状态
-//        if ([self.delegate respondsToSelector:@selector(musicPlayer:playingStatus:)]) {
-//            //
-//            [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPause];
-//        }
-        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"QMMusicPlayerStatusPause" object:nil];
-        
-//        _status = kQMMusicPlayerStatusPause;
 #warning 要使用观察者模式, 必须通过 set方法 或者 KVC 来改变 属性的值
         [self setValue:@(kQMMusicPlayerStatusPause) forKeyPath:@"status"];
-        
         
         return YES;
     }
@@ -169,15 +159,6 @@ static QMMusicPlayer *instance = nil;
         //播放
         [self.player play];
         
-        //通知代理 当前 播放状态
-//        if ([self.delegate respondsToSelector:@selector(musicPlayer:playingStatus:)]) {
-//            //
-//            [self.delegate musicPlayer:self playingStatus:kQMMusicPlayerStatusPlaying];
-//        }
-        
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"QMMusicPlayerStatusPlaying" object:nil];
-        
-//        _status = kQMMusicPlayerStatusPlaying;
 #warning 要使用观察者模式, 必须通过 set方法 或者 KVC 来改变 属性的值
         [self setValue:@(kQMMusicPlayerStatusPlaying) forKeyPath:@"status"];
         
@@ -210,11 +191,6 @@ static QMMusicPlayer *instance = nil;
     return self.player.currentTime;
 }
 
-//是否正在播放
-- (BOOL)isPlaying {
-    
-    return [self.player isPlaying];
-}
 
 #pragma mark - 重写set方法
 - (void)setCurrentTime:(NSTimeInterval)currentTime {

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QMLyricBaseView.h"
 
-@interface QMLyricView : UIView
+@interface QMLyricView : QMLyricBaseView
 
-@property (nonatomic, strong) NSArray *lyricLines;
+//@property (nonatomic, strong) NSArray *lyricLines;
 
 
 /** 类方法,创建一个歌词界面 */

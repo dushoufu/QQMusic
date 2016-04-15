@@ -11,8 +11,9 @@
 #import "QMLyricLine.h"
 #import "QMLyricTool.h"
 #import "UIView+Extension.h"
-
 #import "QMLyricView.h"
+#import "QMAnimationTool.h"
+
 
 
 @interface QMTopDisplayView () <UIScrollViewDelegate>
@@ -25,14 +26,10 @@
 @property (nonatomic, weak) IBOutlet UIView *leftView;
 @property (nonatomic, weak) IBOutlet UIView *rightView;
 
+
 @property (nonatomic, weak) QMLyricView *lyricView;
 
-
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
-
-@property (nonatomic, assign) CGPoint startPoint;
-
-@property (nonatomic, assign) CGPoint currentPoint;
 
 
 @end
@@ -51,9 +48,6 @@
     
     [self.scrollView addSubview:lyricView];
 }
-
-
-
 
 #pragma mark - 重写set方法
 - (void)setTitle:(NSString *)title {
@@ -97,50 +91,60 @@
 - (void)startRotation {
     
     //创建动画
-    CABasicAnimation *rotateAni = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//    CABasicAnimation *rotateAni = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//    
+//    //设置动画属性
+//    rotateAni.fromValue = 0;
+//    rotateAni.toValue = @(2 * M_PI);
+//    rotateAni.duration = 15;
+//    rotateAni.repeatCount = MAXFLOAT;
+//    
+//    rotateAni.removedOnCompletion = NO;
+//    
+//    //添加动画
+//    [self.albumCover.layer addAnimation:rotateAni forKey:@"rotateAnimation"];
     
-    //设置动画属性
-    rotateAni.fromValue = 0;
-    rotateAni.toValue = @(2 * M_PI);
-    rotateAni.duration = 15;
-    rotateAni.repeatCount = MAXFLOAT;
     
-    rotateAni.removedOnCompletion = NO;
+    [QMAnimationTool startRotation:self.albumCover];
     
-    //添加动画
-    [self.albumCover.layer addAnimation:rotateAni forKey:@"rotateAnimation"];
 }
 
 - (void)stopRotation {
     //移除动画
-    [self.albumCover.layer removeAnimationForKey:@"rotateAnimation"];
+//    [self.albumCover.layer removeAnimationForKey:@"rotateAnimation"];
+    
+    [QMAnimationTool stopRotation:self.albumCover];
 
 }
 
 - (void)pauseRotation {
     
     //记录当前时间点
-    CFTimeInterval pauseTime = [self.albumCover.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+//    CFTimeInterval pauseTime = [self.albumCover.layer convertTime:CACurrentMediaTime() fromLayer:nil];
+//    
+//    //让动画定格在这个时间点
+//    self.albumCover.layer.timeOffset = pauseTime;
+//    
+//    self.albumCover.layer.speed = 0;
     
-    //让动画定格在这个时间点
-    self.albumCover.layer.timeOffset = pauseTime;
-    
-    self.albumCover.layer.speed = 0;
+    [QMAnimationTool pauseRotation:self.albumCover];
 }
 
 - (void)resumeRotation {
     
     //获取暂停的时间
-    CFTimeInterval pauseTime = self.albumCover.layer.timeOffset;
+//    CFTimeInterval pauseTime = self.albumCover.layer.timeOffset;
+//    
+//    self.albumCover.layer.timeOffset = 0;
+//    self.albumCover.layer.beginTime = 0;
+//    self.albumCover.layer.speed = 1.0;
+//    
+//    //计算恢复动画的时间
+//    CFTimeInterval resumeTime = [self.albumCover.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pauseTime;
+//    
+//    self.albumCover.layer.beginTime = resumeTime;
     
-    self.albumCover.layer.timeOffset = 0;
-    self.albumCover.layer.beginTime = 0;
-    self.albumCover.layer.speed = 1.0;
-    
-    //计算恢复动画的时间
-    CFTimeInterval resumeTime = [self.albumCover.layer convertTime:CACurrentMediaTime() fromLayer:nil] - pauseTime;
-    
-    self.albumCover.layer.beginTime = resumeTime;
+    [QMAnimationTool resumeRotation:self.albumCover];
 }
 
 
@@ -178,8 +182,6 @@
     self.leftView.alpha = scale;
     self.rightView.alpha = scale;
     
-    
-    NSLog(@"%f", scrollView.contentOffset.x);
 }
 
 

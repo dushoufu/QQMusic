@@ -7,37 +7,16 @@
 //
 
 #import "QMLyricView.h"
-#import "QMLyric.h"
-#import "QMMusicPlayer.h"
-
 #import "UIView+Extension.h"
+#import "QMLyric.h"
 
 @interface QMLyricView () <UITableViewDataSource>
 
 @property (nonatomic, weak) UITableView *tableView;
 
-@property (nonatomic, strong) NSTimer *timer;
-
-@property (nonatomic, strong) QMMusicPlayer *player;
-
-/** 当前播放行 */
-@property (nonatomic, assign) CGFloat playingRow;
-
 @end
 
 @implementation QMLyricView
-
-- (QMMusicPlayer *)player {
-    
-    if (_player == nil) {
-        //
-        _player = [QMMusicPlayer shareMusicPlayer];
-        
-        //添加观察者
-        [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-    }
-    return _player;
-}
 
 - (instancetype)init {
     
@@ -52,12 +31,11 @@
         tableView.backgroundColor = [UIColor clearColor];
         //隐藏分割线
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        //隐藏指示器
+        tableView.showsVerticalScrollIndicator = NO;
         
         self.tableView = tableView;
         [self addSubview:tableView];
-        
-        //创建一个定时器
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateLyric) userInfo:nil repeats:YES];
         
     }
     return self;
@@ -109,66 +87,20 @@
         cell.textLabel.textColor = [UIColor whiteColor];
     }
     
-    
+    //清除背景颜色
     cell.backgroundColor = [UIColor clearColor];
     
     
     return cell;
 }
 
-//刷新歌词 显示进度
-- (void)updateLyric {
-    
-    //获取当前播放时间
-    NSTimeInterval currentTime = self.player.currentTime;
-    
-
-    for (NSInteger i = 0; i < self.lyricLines.count; i++) {
-        
-        //取出当前行模型
-        QMLyric *lyric = self.lyricLines[i];
-        
-        //下一行歌词播放的时间
-        NSTimeInterval nextTime = 0;
-        
-        //判断是否越界    如果 i 已经是最后一行, 下一行歌词播放的时间 为 歌词的总时间
-        if (i == self.lyricLines.count - 1) {
-            //
-            nextTime = self.player.totalTime;
-            
-        } else {    //否则取出下一行模型, 对应的时间
-            
-            QMLyric *nexLyric = self.lyricLines[i+1];
-            
-            nextTime = nexLyric.time;
-        }
-        
-        //判断该行歌词是否是 需要显示的 (正在播放的)
-        if (currentTime > lyric.time && currentTime < nextTime) {
-            //
-            self.playingRow = i;
-            
-            //将歌词滚动到中间 (设置歌词(cell)的偏移量) 34: 行高
-            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-            
-            [self.tableView reloadData];
-            //计算当前一行歌词的播放比例
-//            self.playedScale = (currentTime - lyric.time) / (nextTime - lyric.time);
-            
-            break;  //找到歌词行, 退出循环
-        }
-        
-    }
-    
-//    NSLog(@"cccccccc");
-    
-}
-
-
+#pragma mark - 重写父类set方法
 - (void)setLyricLines:(NSArray *)lyricLines {
     
-    _lyricLines = lyricLines;
+    [super setLyricLines:lyricLines];
     
+    
+    //当歌词改变的时候, 初始化tableView的显示界面
     self.tableView.contentInset = UIEdgeInsetsMake(self.height * 0.5, 0, self.height * 0.5, 0);
     
     //刷新列表
@@ -178,25 +110,17 @@
     
 }
 
-/** 监听播放状态 */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
+- (void)setPlayingRow:(CGFloat)playingRow {
     
-    //    NSLog(@"%@", change);
+    [super setPlayingRow:playingRow];
     
-    if ([change[@"new"] integerValue] == kQMMusicPlayerStatusPlaying) {
-        //
-        self.timer.fireDate = [NSDate distantPast];
-        
-    } else if ([change[@"new"] integerValue] == kQMMusicPlayerStatusPause) {
-        
-        self.timer.fireDate = [NSDate distantFuture];
-    }
+    //滚动到该行, 并刷新
+    //将歌词滚动到中间 (设置歌词(cell)的偏移量) 34: 行高
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:playingRow inSection:0] atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+    
+    [self.tableView reloadData];
 }
 
-- (void)dealloc {
-    
-    [self.player removeObserver:self forKeyPath:@"status"];
-}
 
 
 @end

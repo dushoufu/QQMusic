@@ -12,7 +12,7 @@
 
 #import "QMMusicPlayer.h"
 
-@interface QMLyricLine () <QMMusicPlayerDelegate>
+@interface QMLyricLine ()
 
 /** 已播放的长度比例 */
 @property (nonatomic, assign) CGFloat playedScale;
@@ -20,8 +20,6 @@
 
 @property (nonatomic, strong) QMMusicPlayer *player;
 
-/** 定时器 */
-@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -31,17 +29,10 @@
 
 - (void)awakeFromNib {
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updateLyric) userInfo:nil repeats:YES];
-    
-    //监听 播放状态 通知
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@"QMMusicPlayerStatusPlaying" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//        //恢复定时器
-//        self.timer.fireDate = [NSDate distantPast];
-//    }];
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@"QMMusicPlayerStatusPause" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//        //暂停定时器
-//        self.timer.fireDate = [NSDate distantFuture];
-//    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"playerTimerUpdate" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        //
+        [self updateLyric];
+    }];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -63,8 +54,7 @@
     //获取当前播放时间
     NSTimeInterval currentTime = self.player.currentTime;
     
-    
-    //[_player addObserver:self forKeyPath:@"_player.status" options:NSKeyValueObservingOptionNew context:nil];
+
     for (NSInteger i = 0; i < self.lyricLines.count; i++) {
         
         //取出当前行模型
@@ -111,49 +101,13 @@
         //
         _player = [QMMusicPlayer shareMusicPlayer];
         
-//        _player.delegate = self;
-        
-        //添加观察者 监听播放状态
-        [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
-        
     }
     return _player;
 }
 
-#pragma mark - QMMusicPlayerDelegate
-/** 监听播放器状态 */
-//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus {
-//    
-//    if (playingStatus == kQMMusicPlayerStatusPlaying) {
-//        //
-//        self.timer.fireDate = [NSDate distantPast];
-//    } else {
-//        
-//        self.timer.fireDate = [NSDate distantFuture];
-//    }
-//}
-
-/** 监听播放状态 */
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
-    
-//    NSLog(@"%@", change);
-    
-    if ([change[@"new"] integerValue] == kQMMusicPlayerStatusPlaying) {
-        //
-        self.timer.fireDate = [NSDate distantPast];
-        
-    } else if ([change[@"new"] integerValue] == kQMMusicPlayerStatusPause) {
-        
-        self.timer.fireDate = [NSDate distantFuture];
-    }
-}
-
 - (void)dealloc {
     
-    NSLog(@"%s", __func__);
-    
-    //移除观察者
-    [_player removeObserver:self forKeyPath:@"status"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

@@ -17,7 +17,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface QMPlayerController () <QMMusicPlayerDelegate>
+@interface QMPlayerController ()
 
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImage;
 
@@ -40,10 +40,6 @@
 /** 播放器 */
 @property (nonatomic, strong) QMMusicPlayer *player;
 
-/** 定时器 */
-@property (nonatomic, strong) NSTimer *timer;
-
-
 
 @end
 
@@ -56,7 +52,6 @@
         //
         _player = [QMMusicPlayer shareMusicPlayer];
         
-//        _player.delegate = self;
         
         //添加观察者
         [_player addObserver:self forKeyPath:@"status" options:NSKeyValueObservingOptionNew context:nil];
@@ -82,6 +77,20 @@
         
         //添加到主窗口上
         [window addSubview:self.view];
+        
+        //初始化数据
+        QMMusics *music = self.player.musics[self.player.playingIndex];
+        
+        //设置歌词
+        self.topView.lyric = music.lrcname;
+        
+        //设置歌曲信息
+        self.topView.title = music.name;
+        self.topView.singer = music.singer;
+        self.topView.singerIcon = music.singerIcon;
+        
+        //设置背景
+        self.backgroundImage.image = [UIImage imageNamed:music.singerIcon];
     }
     
     return self;
@@ -90,11 +99,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //创建一个定时器,刷新播放进度
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.2 target:self selector:@selector(updateProgress) userInfo:nil repeats:YES];
-    
     //开始动画
     [self.topView startRotation];
+    
+    //监听定时器 通知
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"playerTimerUpdate" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+        //
+        [self updateProgress];
+        
+    }];
     
     //监听 切换音乐 通知
     [[NSNotificationCenter defaultCenter] addObserverForName:@"QMMusicPlayerPlayingChanged" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
@@ -110,37 +123,12 @@
         self.topView.singer = music.singer;
         self.topView.singerIcon = music.singerIcon;
         
-        //设置背景音乐
+        //设置背景
         self.backgroundImage.image = [UIImage imageNamed:music.singerIcon];
         
+        [self.topView startRotation];
+        
     }];
-    
-//    //监听 播放状态 通知
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@"QMMusicPlayerStatusPlaying" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//        //
-//        //改变按钮状态
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_normal"] forState:UIControlStateNormal];
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_highlight"] forState:UIControlStateHighlighted];
-//        
-//        //恢复定时器
-//        self.timer.fireDate = [NSDate distantPast];
-//        
-//        //恢复动画
-//        [self.topView resumeRotation];
-//    }];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserverForName:@"QMMusicPlayerStatusPause" object:nil queue:nil usingBlock:^(NSNotification * _Nonnull note) {
-//        //
-//        //改变按钮状态
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_normal"] forState:UIControlStateNormal];
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_highlight"] forState:UIControlStateHighlighted];
-//        
-//        //暂停定时器
-//        self.timer.fireDate = [NSDate distantFuture];
-//        
-//        //暂停动画
-//        [self.topView pauseRotation];
-//    }];
 }
 
 
@@ -212,22 +200,6 @@
     
 }
 
-///** 打开歌词界面 */
-//- (IBAction)panOpenLyric:(UIPanGestureRecognizer *)sender {
-//    
-//    if (sender.state == UIGestureRecognizerStateBegan) {
-//        //显示歌词控制器
-//        
-//    } else if (sender.state == UIGestureRecognizerStateChanged) {
-//        
-//        self.topView
-//        
-//    } else if (sender.state == UIGestureRecognizerStateEnded) {
-//        //
-//        
-//    }
-//}
-
 
 #pragma mark - 播放控制
 /** 播放/暂停 */
@@ -264,25 +236,19 @@
     
     self.sliderLeft.width = (self.player.currentTime / self.player.totalTime) * self.sliderRight.width;
     
-//    NSLog(@"......%f", self.sliderLeft.width);
-    
     self.sliderThumb.centerX = CGRectGetMaxX(self.sliderLeft.frame);
     
 }
 
-
 #pragma mark - 跳转控制器
 /** 显示控制器 */
-- (void)showWithIndexNumber:(NSInteger)indexNumber {
+- (void)show {
     
     //通过动画的方式显示出窗口
     [UIView animateWithDuration:0.5 animations:^{
         //
         self.view.transform = CGAffineTransformIdentity;
     }];
-    
-    //并播放索引的音乐
-    [self.player playWithIndexNumber:indexNumber];
 }
 
 - (IBAction)back {
@@ -294,51 +260,7 @@
     }];
 }
 
-#pragma mark - QMMusicPlayerDelegate 代理方法
-/** 监听是否正在播放 */
-//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus {
-//    
-//    if (playingStatus == kQMMusicPlayerStatusPlaying) {     //播放
-//        
-//        //改变按钮状态
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_normal"] forState:UIControlStateNormal];
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_highlight"] forState:UIControlStateHighlighted];
-//        
-//        //恢复定时器
-//        self.timer.fireDate = [NSDate distantPast];
-//        
-//        //恢复动画
-//        [self.topView resumeRotation];
-//        
-//    } else {    //暂停
-//        
-//        //改变按钮状态
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_normal"] forState:UIControlStateNormal];
-//        [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_highlight"] forState:UIControlStateHighlighted];
-//        
-//        //暂停定时器
-//        self.timer.fireDate = [NSDate distantFuture];
-//        
-//        //暂停动画
-//        [self.topView pauseRotation];
-//        
-//    }
-//}
 
-//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingModel:(QMMusics *)playingModel {
-//    
-//    //设置歌曲信息
-//    self.topView.title = playingModel.name;
-//    self.topView.singer = playingModel.singer;
-//    self.topView.singerIcon = playingModel.singerIcon;
-//    
-//    //设置背景音乐
-//    self.backgroundImage.image = [UIImage imageNamed:playingModel.singerIcon];
-//    
-//    //设置歌词
-//    self.topView.lyric = playingModel.lrcname;
-//    
-//}
 
 /** 监听播放状态 */
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -348,10 +270,7 @@
         //改变按钮状态
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_normal"] forState:UIControlStateNormal];
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_pause_highlight"] forState:UIControlStateHighlighted];
-        
-        //恢复定时器
-        self.timer.fireDate = [NSDate distantPast];
-        
+                
         //恢复动画
         [self.topView resumeRotation];
         
@@ -360,9 +279,6 @@
         //改变按钮状态
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_normal"] forState:UIControlStateNormal];
         [self.playButton setImage:[UIImage imageNamed:@"player_btn_play_highlight"] forState:UIControlStateHighlighted];
-        
-        //暂停定时器
-        self.timer.fireDate = [NSDate distantFuture];
         
         //暂停动画
         [self.topView pauseRotation];

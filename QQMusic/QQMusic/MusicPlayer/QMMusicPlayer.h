@@ -19,28 +19,14 @@ typedef enum : NSUInteger {
 } QMMusicPlayerStatus;
 
 
-
-@class AVAudioPlayer, QMMusicPlayer, QMMusics;
-
-#warning 代理是 一对一, 如果要 多对多, 需要使用通知
-@protocol QMMusicPlayerDelegate <NSObject>
-
-@optional
-//音乐播放状态
-//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingStatus:(QMMusicPlayerStatus)playingStatus;
-
-//切换音乐
-//- (void)musicPlayer:(QMMusicPlayer *)musicPlayer playingModel:(QMMusics *)playingModel;
-
-
-@end
-
-
-
 @interface QMMusicPlayer : NSObject
 
-/** 代理 */
-//@property (nonatomic, weak) id<QMMusicPlayerDelegate> delegate;
+
+/** 音乐列表 */
+@property (nonatomic, strong) NSArray *musics;
+
+/** 正在播放的索引 */
+@property (nonatomic, assign) NSInteger playingIndex;
 
 
 /** 音乐总时间长度 */
@@ -58,8 +44,6 @@ typedef enum : NSUInteger {
 /** 开始播放音乐 */
 - (BOOL)playWithIndexNumber:(NSInteger)IndexNumber;
 
-/** 指定时间播放 */
-- (BOOL)playAtTime:(NSTimeInterval)time;
 
 /** 暂停 */
 - (BOOL)pause;

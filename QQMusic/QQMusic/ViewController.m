@@ -10,7 +10,8 @@
 #import "QMMusics.h"
 #import "QMMusicCell.h"
 
-#import "QMPlayerController.h"
+#import "QMMiniPlayerController.h"
+#import "QMMusicPlayer.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -19,21 +20,23 @@
 /** 歌曲信息 */
 @property (nonatomic, strong) NSArray *musics;
 
-/** 播放器控制器 */
-@property (nonatomic, strong) QMPlayerController *playerController;
+/** 迷你播放器 */
+@property (nonatomic, strong) QMMiniPlayerController *miniPlayer;
+
+/** 播放器 */
+@property (nonatomic, strong) QMMusicPlayer *player;
 
 @end
 
 @implementation ViewController
 
-//懒加载播放器界面
-- (QMPlayerController *)playerController {
+- (QMMusicPlayer *)player {
     
-    if (_playerController == nil) {
+    if (_player == nil) {
         //
-        _playerController = [[QMPlayerController alloc] init];
+        _player = [QMMusicPlayer shareMusicPlayer];
     }
-    return _playerController;
+    return _player;
 }
 
 //数据懒加载
@@ -64,9 +67,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //创建mini播放器
+    QMMiniPlayerController *miniPlayerController = [[QMMiniPlayerController alloc] init];
+    
+    self.miniPlayer = miniPlayerController;
+    
 }
-
-
 
 #pragma mark - 数据源方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -86,10 +92,9 @@
 
 #pragma mark - 代理方法
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //跳转到播放界面,并且播放音乐
     
-    //通过懒加载的方式跳转到播放界面
-    [self.playerController showWithIndexNumber:indexPath.row];
+    //播放索引的音乐
+    [self.player playWithIndexNumber:indexPath.row];
     
     
 }

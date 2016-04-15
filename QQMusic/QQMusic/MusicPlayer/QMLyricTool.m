@@ -26,10 +26,9 @@
     
     for (NSInteger i = 0; i < lyricLines.count; i++) {
         //
-
-        
         NSDictionary *dict = @{@"lyric" : lyricLines[i],
-                               @"time" : lyricTime[i]};
+                               @"time" : lyricTime[i]
+                               };
         
         QMLyric *lyric = [QMLyric lyricWithDict:dict];
         

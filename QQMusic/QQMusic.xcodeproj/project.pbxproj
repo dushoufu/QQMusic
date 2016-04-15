@@ -66,6 +66,12 @@
 		B8783A241CBD074E00A47C6F /* QMTopDisplayView.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A231CBD074E00A47C6F /* QMTopDisplayView.m */; };
 		B8783A2B1CBD238E00A47C6F /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */; };
 		B87D3C8B1CBFC28D008ADD06 /* QMLyricView.m in Sources */ = {isa = PBXBuildFile; fileRef = B87D3C8A1CBFC28D008ADD06 /* QMLyricView.m */; };
+		B88D08D91CC0B9100079A3E2 /* QMLyricBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D08D81CC0B9100079A3E2 /* QMLyricBaseView.m */; };
+		B88D08DE1CC0C3410079A3E2 /* QMMiniPlayerController.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D08DC1CC0C3410079A3E2 /* QMMiniPlayerController.m */; };
+		B88D08DF1CC0C3410079A3E2 /* QMMiniPlayerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B88D08DD1CC0C3410079A3E2 /* QMMiniPlayerController.xib */; };
+		B88D08E21CC0F1890079A3E2 /* QMAnimationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D08E11CC0F1890079A3E2 /* QMAnimationTool.m */; };
+		B88D08E51CC0F6350079A3E2 /* QMPlayerTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D08E41CC0F6350079A3E2 /* QMPlayerTimer.m */; };
+		B88D08E91CC123EB0079A3E2 /* QMPlayList.m in Sources */ = {isa = PBXBuildFile; fileRef = B88D08E81CC123EB0079A3E2 /* QMPlayList.m */; };
 		B8D6E25F1CBE1AE0004C287C /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */; };
 		B8D6E26C1CBE5444004C287C /* QMLyricLine.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E26B1CBE5444004C287C /* QMLyricLine.m */; };
 		B8D6E26F1CBE69BC004C287C /* QMLyric.m in Sources */ = {isa = PBXBuildFile; fileRef = B8D6E26E1CBE69BC004C287C /* QMLyric.m */; };
@@ -144,6 +150,17 @@
 		B8783A2A1CBD238E00A47C6F /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 		B87D3C891CBFC28D008ADD06 /* QMLyricView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyricView.h; sourceTree = "<group>"; };
 		B87D3C8A1CBFC28D008ADD06 /* QMLyricView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMLyricView.m; sourceTree = "<group>"; };
+		B88D08D71CC0B9100079A3E2 /* QMLyricBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyricBaseView.h; sourceTree = "<group>"; };
+		B88D08D81CC0B9100079A3E2 /* QMLyricBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMLyricBaseView.m; sourceTree = "<group>"; };
+		B88D08DB1CC0C3410079A3E2 /* QMMiniPlayerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMMiniPlayerController.h; sourceTree = "<group>"; };
+		B88D08DC1CC0C3410079A3E2 /* QMMiniPlayerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMMiniPlayerController.m; sourceTree = "<group>"; };
+		B88D08DD1CC0C3410079A3E2 /* QMMiniPlayerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QMMiniPlayerController.xib; sourceTree = "<group>"; };
+		B88D08E01CC0F1890079A3E2 /* QMAnimationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMAnimationTool.h; sourceTree = "<group>"; };
+		B88D08E11CC0F1890079A3E2 /* QMAnimationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMAnimationTool.m; sourceTree = "<group>"; };
+		B88D08E31CC0F6350079A3E2 /* QMPlayerTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMPlayerTimer.h; sourceTree = "<group>"; };
+		B88D08E41CC0F6350079A3E2 /* QMPlayerTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMPlayerTimer.m; sourceTree = "<group>"; };
+		B88D08E71CC123EB0079A3E2 /* QMPlayList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMPlayList.h; sourceTree = "<group>"; };
+		B88D08E81CC123EB0079A3E2 /* QMPlayList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QMPlayList.m; sourceTree = "<group>"; };
 		B8D6E25D1CBE1AE0004C287C /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
 		B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		B8D6E26A1CBE5444004C287C /* QMLyricLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QMLyricLine.h; sourceTree = "<group>"; };
@@ -174,20 +191,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B87839A31CBCBBB600A47C6F /* MusicPlayer */ = {
+		B87839A31CBCBBB600A47C6F /* MusicPlayer(工具类) */ = {
 			isa = PBXGroup;
 			children = (
+				B88D08E61CC123B40079A3E2 /* MusicList */,
 				B87839A41CBCBBDD00A47C6F /* QMMusicPlayer.h */,
 				B87839A51CBCBBDD00A47C6F /* QMMusicPlayer.m */,
 				B8D6E2701CBE6AB0004C287C /* QMLyricTool.h */,
 				B8D6E2711CBE6AB0004C287C /* QMLyricTool.m */,
+				B88D08E01CC0F1890079A3E2 /* QMAnimationTool.h */,
+				B88D08E11CC0F1890079A3E2 /* QMAnimationTool.m */,
+				B88D08E31CC0F6350079A3E2 /* QMPlayerTimer.h */,
+				B88D08E41CC0F6350079A3E2 /* QMPlayerTimer.m */,
 			);
+			name = "MusicPlayer(工具类)";
 			path = MusicPlayer;
 			sourceTree = "<group>";
 		};
 		B87839AA1CBCC0C200A47C6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				B88D08DA1CC0C3050079A3E2 /* MiniPlayerBar */,
 				B87839AB1CBCC0C200A47C6F /* QMPlayerController.h */,
 				B87839AC1CBCC0C200A47C6F /* QMPlayerController.m */,
 				B87839AD1CBCC0C200A47C6F /* QMPlayerController.xib */,
@@ -300,7 +324,7 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		B8783A251CBD22F300A47C6F /* Category */ = {
+		B8783A251CBD22F300A47C6F /* Category(分类) */ = {
 			isa = PBXGroup;
 			children = (
 				B8783A291CBD238E00A47C6F /* UIView+Extension.h */,
@@ -308,7 +332,27 @@
 				B8D6E25D1CBE1AE0004C287C /* NSString+Extension.h */,
 				B8D6E25E1CBE1AE0004C287C /* NSString+Extension.m */,
 			);
+			name = "Category(分类)";
 			path = Category;
+			sourceTree = "<group>";
+		};
+		B88D08DA1CC0C3050079A3E2 /* MiniPlayerBar */ = {
+			isa = PBXGroup;
+			children = (
+				B88D08DB1CC0C3410079A3E2 /* QMMiniPlayerController.h */,
+				B88D08DC1CC0C3410079A3E2 /* QMMiniPlayerController.m */,
+				B88D08DD1CC0C3410079A3E2 /* QMMiniPlayerController.xib */,
+			);
+			name = MiniPlayerBar;
+			sourceTree = "<group>";
+		};
+		B88D08E61CC123B40079A3E2 /* MusicList */ = {
+			isa = PBXGroup;
+			children = (
+				B88D08E71CC123EB0079A3E2 /* QMPlayList.h */,
+				B88D08E81CC123EB0079A3E2 /* QMPlayList.m */,
+			);
+			path = MusicList;
 			sourceTree = "<group>";
 		};
 		B8D6E2661CBE3B5C004C287C /* Lyric */ = {
@@ -318,6 +362,8 @@
 				B8D6E26B1CBE5444004C287C /* QMLyricLine.m */,
 				B87D3C891CBFC28D008ADD06 /* QMLyricView.h */,
 				B87D3C8A1CBFC28D008ADD06 /* QMLyricView.m */,
+				B88D08D71CC0B9100079A3E2 /* QMLyricBaseView.h */,
+				B88D08D81CC0B9100079A3E2 /* QMLyricBaseView.m */,
 			);
 			path = Lyric;
 			sourceTree = "<group>";
@@ -341,11 +387,11 @@
 		B8EA57261CBBB5A000396142 /* QQMusic */ = {
 			isa = PBXGroup;
 			children = (
-				B8783A251CBD22F300A47C6F /* Category */,
+				B8783A251CBD22F300A47C6F /* Category(分类) */,
 				B8783A1E1CBCC0D900A47C6F /* View */,
 				B87839B01CBCC0CB00A47C6F /* Model */,
 				B87839AA1CBCC0C200A47C6F /* Controller */,
-				B87839A31CBCBBB600A47C6F /* MusicPlayer */,
+				B87839A31CBCBBB600A47C6F /* MusicPlayer(工具类) */,
 				B8EA572A1CBBB5A000396142 /* AppDelegate.h */,
 				B8EA572B1CBBB5A000396142 /* AppDelegate.m */,
 				B8EA572D1CBBB5A000396142 /* ViewController.h */,
@@ -457,6 +503,7 @@
 				B87839F81CBCC0D200A47C6F /* lkq_icon@2x.jpg in Resources */,
 				B8783A161CBCC0D200A47C6F /* 120125029.mp3 in Resources */,
 				B87839F31CBCC0D200A47C6F /* jj@2x.jpg in Resources */,
+				B88D08DF1CC0C3410079A3E2 /* QMMiniPlayerController.xib in Resources */,
 				B8783A171CBCC0D200A47C6F /* 12309111.mp3 in Resources */,
 				B8783A131CBCC0D200A47C6F /* 10405520.mp3 in Resources */,
 				B8783A101CBCC0D200A47C6F /* 故乡.lrc in Resources */,
@@ -491,9 +538,13 @@
 			files = (
 				B8783A2B1CBD238E00A47C6F /* UIView+Extension.m in Sources */,
 				B8D6E26C1CBE5444004C287C /* QMLyricLine.m in Sources */,
+				B88D08E21CC0F1890079A3E2 /* QMAnimationTool.m in Sources */,
+				B88D08D91CC0B9100079A3E2 /* QMLyricBaseView.m in Sources */,
 				B8EA572F1CBBB5A000396142 /* ViewController.m in Sources */,
 				B8D6E2721CBE6AB0004C287C /* QMLyricTool.m in Sources */,
 				B87839AE1CBCC0C200A47C6F /* QMPlayerController.m in Sources */,
+				B88D08DE1CC0C3410079A3E2 /* QMMiniPlayerController.m in Sources */,
+				B88D08E51CC0F6350079A3E2 /* QMPlayerTimer.m in Sources */,
 				B8783A211CBCC0D900A47C6F /* QMMusicCell.m in Sources */,
 				B87D3C8B1CBFC28D008ADD06 /* QMLyricView.m in Sources */,
 				B87839A61CBCBBDD00A47C6F /* QMMusicPlayer.m in Sources */,
@@ -503,6 +554,7 @@
 				B87839B31CBCC0CB00A47C6F /* QMMusics.m in Sources */,
 				B8783A241CBD074E00A47C6F /* QMTopDisplayView.m in Sources */,
 				B8D6E26F1CBE69BC004C287C /* QMLyric.m in Sources */,
+				B88D08E91CC123EB0079A3E2 /* QMPlayList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
